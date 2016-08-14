@@ -18,18 +18,7 @@ function setup() {
 
 
 function keyPressed(){	//refactor l8r
-	if(keyCode == LEFT_ARROW){
-		snake.direction(-1, 0);
-	}
-	else if(keyCode == RIGHT_ARROW){
-		snake.direction(1, 0);
-	}
-	else if(keyCode == UP_ARROW){
-		snake.direction(0, -1);
-	}
-	else if(keyCode == DOWN_ARROW){
-		snake.direction(0, 1);
-	}
+	snake.move(keyCode);
 }
 
 function draw() {
@@ -45,10 +34,12 @@ function draw() {
 		food.random_location();
 	}
 
+	if (snake.tail_here(snake.x, snake.y)) { 
+		lose();
+	}
 	if (snake.x == 0 || snake.x == (cols - 1) * sqr_size|| snake.y == 0 || snake.y == (rows - 1) * sqr_size){
 		lose();
 	}
-
 }
 
 function borders(){
@@ -68,5 +59,10 @@ function borders(){
 }
 
 function lose(){
-	alert("You've lost!");
+	alert("You've lost!"); //hacer algo mas.
+	restart_game();
+}
+
+function restart_game(){
+	snake = new Snake();
 }

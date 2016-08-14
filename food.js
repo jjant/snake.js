@@ -5,8 +5,8 @@ function Food(){
 	}
 
 	this.random_location = function(){
-		this.x = round(random(cols)) * sqr_size;
-		this.y = round(random(rows)) * sqr_size;
+		this.x = round(random(1, cols - 2)) * sqr_size;
+		this.y = round(random(1, rows - 2)) * sqr_size;
 	}
 
 	this.random_location();
