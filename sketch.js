@@ -8,6 +8,8 @@ var cols = w / sqr_size;
 var snake;
 var food;
 
+var paused = false;
+
 function setup() {
 	createCanvas(w, h);
 	frameRate(10);
@@ -18,7 +20,11 @@ function setup() {
 
 
 function keyPressed(){	//refactor l8r
-	snake.move(keyCode);
+	if(!paused)
+		snake.move(keyCode);
+	console.log(key);
+	if(key == 'P')
+		toggle_pause();
 }
 
 function draw() {
@@ -26,7 +32,9 @@ function draw() {
 	borders();
 
 	food.draw();
-	snake.update();
+
+	if(!paused)
+		snake.update();
 	snake.draw();
 
 	if(snake.x == food.x && snake.y == food.y){
@@ -65,4 +73,8 @@ function lose(){
 
 function restart_game(){
 	snake = new Snake();
+}
+
+function toggle_pause(){
+	paused = paused == true? false : true;
 }
